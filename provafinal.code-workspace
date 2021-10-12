@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "config"
+		},
+		{
+			"path": "config-server"
+		},
+		{
+			"path": "eureka-server"
+		},
+		{
+			"path": "zuul-server"
+		},
+		{
+			"path": "produto-ms"
+		},
+		{
+			"path": "vendas-ms"
+		}
+	]
+}
