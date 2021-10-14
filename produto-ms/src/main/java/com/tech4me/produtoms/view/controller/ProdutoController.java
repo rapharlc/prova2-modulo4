@@ -33,9 +33,9 @@ public class ProdutoController {
         return new ResponseEntity<>(servicoProduto.obterTodos(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<ProdutoDto>> obterPorId(@PathVariable String id){
-        Optional<ProdutoDto> produtoEncontrado = servicoProduto.obterPorId(id);
+    @GetMapping("/{idProduto}")
+    public ResponseEntity<Optional<ProdutoDto>> obterPorId(@PathVariable String idProduto){
+        Optional<ProdutoDto> produtoEncontrado = servicoProduto.obterPorId(idProduto);
         return new ResponseEntity<>(produtoEncontrado, HttpStatus.OK);
     }
 

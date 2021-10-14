@@ -38,11 +38,6 @@ public class VendaController {
         return new ResponseEntity<>(vendaEncontrada, HttpStatus.OK);
     }
 
-    //@GetMapping("/{idDoProduto}")
-    //public ResponseEntity<List<VendaDto>> obterPorIdDoProduto (@PathVariable String idDoProduto){
-    //    List<VendaDto> vendasEncontradasPorProduto = servicoVenda.obterPorIdDoProduto(idDoProduto);
-    //    return new ResponseEntity<>(vendasEncontradasPorProduto, HttpStatus.OK);
-    //}
 
     @PostMapping
     public ResponseEntity<VendaDto> criarVenda(@RequestBody @Valid VendaDto vendaDto){

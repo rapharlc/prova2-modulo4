@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.tech4me.vendasms.VendasMsApplication;
 import com.tech4me.vendasms.compartilhado.VendaDto;
+import com.tech4me.vendasms.http.VendaFeignClient;
 import com.tech4me.vendasms.model.Venda;
 import com.tech4me.vendasms.repository.VendaRepository;
 
@@ -17,13 +19,15 @@ public class VendaServiceImpl implements VendaService {
 
     @Autowired
     private VendaRepository repositorioVenda;
-
+    @Autowired
+    private VendaFeignClient produtoMsClient;
     @Override
     public VendaDto criarVenda(VendaDto vendaDto) {
         ModelMapper mapper = new ModelMapper();
         Venda vendaEntidade = mapper.map(vendaDto, Venda.class);
         vendaEntidade = repositorioVenda.save(vendaEntidade);
-        return mapper.map(vendaEntidade, VendaDto.class);
+        VendaDto dto = mapper.map(vendaEntidade, VendaDto.class);
+        return dto; 
     }
 
     @Override
@@ -36,7 +40,9 @@ public class VendaServiceImpl implements VendaService {
     public Optional<VendaDto> obterPorId(String id) {
         Optional<Venda> venda = repositorioVenda.findById(id);
         if(venda.isPresent()){
+            String idProduto = venda.get().getIdProdutoVendido();
             VendaDto dto = new ModelMapper().map(venda.get(), VendaDto.class);
+            dto.setProduto(produtoMsClient.produto(idProduto));
             return Optional.of(dto);
         }
         return Optional.empty();
@@ -48,10 +54,6 @@ public class VendaServiceImpl implements VendaService {
         
     }
 
-    //@Override
-    //public List<VendaDto> obterPorIdDoProduto(String idDoProduto) { 
-    //    Optional<Venda> vendas = repositorioVenda.findOne();
-    //    return vendas.stream().map(venda -> new ModelMapper().map(venda, VendaDto.class)).collect(Collectors.toList());
-    //} 
+    
     
 } 

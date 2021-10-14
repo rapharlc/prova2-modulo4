@@ -18,5 +18,8 @@
 		{
 			"path": "vendas-ms"
 		}
-	]
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
 }

@@ -10,6 +10,6 @@ public interface VendaService {
     VendaDto criarVenda(VendaDto vendaDto);
     List<VendaDto> obterTodos();
     Optional<VendaDto> obterPorId(String id);
-    //List<VendaDto> obterPorIdDoProduto(String idDoProduto);
     void removerVenda(String id);
+    
 }
