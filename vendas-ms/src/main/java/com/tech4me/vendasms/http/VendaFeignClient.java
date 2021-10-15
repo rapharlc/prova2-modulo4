@@ -1,21 +1,38 @@
 package com.tech4me.vendasms.http;
 
-import java.util.List;
-import java.util.Optional;
+
+
+
+
 
 import com.tech4me.vendasms.compartilhado.Produto;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "produto-ms")
+
+@FeignClient(name = "produto-ms", fallback = VendaFeignClientFallback.class)
 public interface VendaFeignClient {
-    //@PatchMapping(path = "/api/produtos/{id}/{quantidade}")
-   // List<Produto> atualizarEstoque(@PathVariable String id, @PathVariable int quantidade);
+    
     @GetMapping(path = "/api/produtos/{idProduto}")
     Produto produto(@PathVariable String idProduto);
+
+    //Metodo de cliente http para alterar estoque do produto vendido
+    //@PatchMapping(path = "/api/produtos/{id}/{quantidade}")
+    //Produto produto(@PathVariable String id, @PathVariable String quantidade);
     
+}
+
+@Component
+class VendaFeignClientFallback implements VendaFeignClient{
+
+    @Override
+    public Produto produto(String idProduto) {
+        
+        return null;
+        
+    }
+
 }

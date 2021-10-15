@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import com.tech4me.vendasms.compartilhado.VendaDto;
 import com.tech4me.vendasms.service.VendaServiceImpl;
+import com.tech4me.vendasms.view.model.VendaResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class VendaController {
     private VendaServiceImpl servicoVenda;
 
     @GetMapping
-    public ResponseEntity<List<VendaDto>> obterTodos(){
+    public ResponseEntity<List<VendaResponse>> obterTodos(){
         return new ResponseEntity<>(servicoVenda.obterTodos(), HttpStatus.OK);
     }
 

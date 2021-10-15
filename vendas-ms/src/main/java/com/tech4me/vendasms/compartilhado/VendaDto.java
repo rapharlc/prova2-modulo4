@@ -1,6 +1,5 @@
 package com.tech4me.vendasms.compartilhado;
 
-import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -15,7 +14,7 @@ public class VendaDto {
     @NotEmpty(message = "A Id do produto vendido dever diferente de vazio")
     private String idProdutoVendido;
     @Positive(message = "A quantidade vendida deve ser maior que zero")
-    private int quantidadeVendida;
+    private String quantidadeVendida;
     private Produto produto;
     
     public String getId() {
@@ -42,10 +41,10 @@ public class VendaDto {
     public void setIdProdutoVendido(String idProdutoVendido) {
         this.idProdutoVendido = idProdutoVendido;
     }
-    public int getQuantidadeVendida() {
+    public String getQuantidadeVendida() {
         return quantidadeVendida;
     }
-    public void setQuantidadeVendida(int quantidadeVendida) {
+    public void setQuantidadeVendida(String quantidadeVendida) {
         this.quantidadeVendida = quantidadeVendida;
     }
 

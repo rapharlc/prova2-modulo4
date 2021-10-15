@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.tech4me.vendasms.VendasMsApplication;
 import com.tech4me.vendasms.compartilhado.VendaDto;
 import com.tech4me.vendasms.http.VendaFeignClient;
 import com.tech4me.vendasms.model.Venda;
 import com.tech4me.vendasms.repository.VendaRepository;
+import com.tech4me.vendasms.view.model.VendaResponse;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +21,28 @@ public class VendaServiceImpl implements VendaService {
     private VendaRepository repositorioVenda;
     @Autowired
     private VendaFeignClient produtoMsClient;
+
     @Override
     public VendaDto criarVenda(VendaDto vendaDto) {
+        vendaDto.setId(null);
         ModelMapper mapper = new ModelMapper();
         Venda vendaEntidade = mapper.map(vendaDto, Venda.class);
         vendaEntidade = repositorioVenda.save(vendaEntidade);
+        
+        //Regra de negócio para alterar a quantidade de estoque do produto vendido
+        //String id = vendaEntidade.getIdProdutoVendido();
+        //String quantidade = vendaEntidade.getQuantidadeVendida();
         VendaDto dto = mapper.map(vendaEntidade, VendaDto.class);
-        return dto; 
+        //dto.setProduto(produtoMsClient.produto(id, quantidade));
+        return dto;
+
+         
     }
 
     @Override
-    public List<VendaDto> obterTodos() {
+    public List<VendaResponse> obterTodos() {
         List<Venda> vendas = repositorioVenda.findAll();
-        return vendas.stream().map(venda -> new ModelMapper().map(venda, VendaDto.class)).collect(Collectors.toList());
+        return vendas.stream().map(venda -> new ModelMapper().map(venda, VendaResponse.class)).collect(Collectors.toList());
     }
 
     @Override

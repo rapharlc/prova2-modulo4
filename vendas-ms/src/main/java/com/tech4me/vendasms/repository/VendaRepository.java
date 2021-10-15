@@ -1,10 +1,6 @@
 package com.tech4me.vendasms.repository;
 
 
-
-
-import java.util.List;
-
 import com.tech4me.vendasms.model.Venda;
 
 import org.springframework.data.mongodb.repository.MongoRepository;

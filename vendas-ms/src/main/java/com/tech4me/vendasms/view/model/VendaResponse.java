@@ -1,19 +1,24 @@
-package com.tech4me.vendasms.model;
+package com.tech4me.vendasms.view.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 
-@Document
-public class Venda {
-    @Id
+public class VendaResponse {
+    
     private String id;
     private String dataDaVenda;
+    @NotBlank(message = "A Id do produto vendido deve ser preenchida")
+    @NotEmpty(message = "A Id do produto vendido dever diferente de vazio")
     private String idProdutoVendido;
+    @Positive(message = "A quantidade vendida deve ser maior que zero")
     private String quantidadeVendida;
+    
     
     public String getId() {
         return id;
     }
+    
     public void setId(String id) {
         this.id = id;
     }
@@ -35,8 +40,4 @@ public class Venda {
     public void setQuantidadeVendida(String quantidadeVendida) {
         this.quantidadeVendida = quantidadeVendida;
     }
-
-
-    
-    
 }
